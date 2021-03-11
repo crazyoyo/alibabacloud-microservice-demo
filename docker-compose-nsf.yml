@@ -1,0 +1,191 @@
+version: "3"
+services:
+  zookeeper:
+    hostname: zookeeper-server
+    image: zookeeper:latest
+    container_name: zookeeper-standalone
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+    ports:
+      - "2181:2181"
+
+  #  currency-mysql:
+  #    image: mysql:5.6
+  #    ports:
+  #      - 3306
+  #    command: [
+  #      --character-set-server=utf8mb4,
+  #      --collation-server=utf8mb4_unicode_ci
+  #    ]
+  #    environment:
+  #      MYSQL_ROOT_PASSWORD: currencyservice
+  #      MYSQL_DATABASE: currency
+
+  checkout-mysql:
+    image: mysql:5.6
+    ports:
+      - 3306
+    command: [
+      --character-set-server=utf8mb4,
+      --collation-server=utf8mb4_unicode_ci
+    ]
+    environment:
+      MYSQL_ROOT_PASSWORD: checkoutservice
+      MYSQL_DATABASE: checkout
+
+  product-mysql:
+    image: mysql:5.6
+    ports:
+      - 3306
+    command: [
+      --character-set-server=utf8mb4,
+      --collation-server=utf8mb4_unicode_ci
+    ]
+    environment:
+      MYSQL_ROOT_PASSWORD: productservice
+      MYSQL_DATABASE: product
+
+  cart-redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+
+  frontend:
+    build: ./src/frontend
+    image: eks.demo.host/nsf-demo/frontend:1.0.0-SNAPSHOT
+    container_name: frontend
+    #    restart: always
+    environment:
+      - dubbo.registry.address=zookeeper//zookeeper.host:2181
+      - dubbo.registry.simplified=true
+      - dubbo.metadata-report.address=zookeeper.host:2181
+      - dubbo.config-center.address=zookeeper.host:2181
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "zookeeper"
+
+  cartservice:
+    build: ./src/cartservice
+    image: eks.demo.host/nsf-demo/cartservice:1.0.0-SNAPSHOT
+    container_name: cartservice
+    environment:
+      - dubbo.registry.address=zookeeper//zookeeper.host:2181
+      - dubbo.registry.simplified=true
+      - dubbo.metadata-report.address=zookeeper-server:2181
+      - dubbo.config-center.address=zookeeper-server:2181
+      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - spring.cloud.zookeeper.discovery.register=true
+      - spring.cloud.zookeeper.config.root=root
+      - spring.cloud.zookeeper.config.enabled=true
+    depends_on:
+      - "zookeeper"
+      - "cart-redis"
+
+  checkoutservice:
+    build: ./src/checkoutservice
+    image: eks.demo.host/nsf-demo/checkoutservice:1.0.0-SNAPSHOT
+    container_name: checkoutservice
+    environment:
+      - dubbo.registry.address=zookeeper//zookeeper.host:2181
+      - dubbo.registry.simplified=true
+      - dubbo.metadata-report.address=zookeeper-server:2181
+      - dubbo.config-center.address=zookeeper-server:2181
+      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - spring.cloud.zookeeper.discovery.register=true
+      - spring.cloud.zookeeper.config.root=root
+      - spring.cloud.zookeeper.config.enabled=true
+    depends_on:
+      - "zookeeper"
+      - "checkout-mysql"
+
+  prdoctservice:
+    build: ./src/productservice
+    image: eks.demo.host/nsf-demo/productservice:1.0.0-SNAPSHOT
+    container_name: productservice
+    environment:
+      - dubbo.registry.address=zookeeper//zookeeper.host:2181
+      - dubbo.registry.simplified=true
+      - dubbo.metadata-report.address=zookeeper-server:2181
+      - dubbo.config-center.address=zookeeper-server:2181
+      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - spring.cloud.zookeeper.discovery.register=true
+      - spring.cloud.zookeeper.config.root=root
+      - spring.cloud.zookeeper.config.enabled=true
+    depends_on:
+      - "zookeeper"
+      - "product-mysql"
+
+#  loadgenerator:
+#    build: ./src/loadgenerator
+#    image: eks.demo.host/nsf-demo/loadgenerator:1.0.0-SNAPSHOT
+#    container_name: loadgenerator
+
+#  adservice:
+#    build: ./src/adservice
+#    image: adservice:1.0.0-SNAPSHOT
+#    container_name: adservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
+#
+#
+#
+#  currencyservice:
+#    build: ./src/productservice
+#    image: currencyservice:1.0.0-SNAPSHOT
+#    container_name: currencyservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
+#
+#  emailservice:
+#    build: ./src/emailservice
+#    image: emailservice:1.0.0-SNAPSHOT
+#    container_name: emailservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
+#
+#  paymentservice:
+#    build: ./src/paymentservice
+#    image: paymentservice:1.0.0-SNAPSHOT
+#    container_name: paymentservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
+#
+#  recomendationservice:
+#    build: ./src/recomendationservice
+#    image: recomendationservice:1.0.0-SNAPSHOT
+#    container_name: recomendationservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
+#
+#  shippingservice:
+#    build: ./src/shippingservice
+#    image: shippingservice:1.0.0-SNAPSHOT
+#    container_name: shippingservice
+#    environment:
+#      - dubbo.registry.address=nacos://nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#      - spring.cloud.nacos.discovery.server-addr=nacos-server:8848
+#    depends_on:
+#      - "nacos"
