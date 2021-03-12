@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibabacloud.hipstershop.productservice.ProductServiceApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.serviceregistry.Registration;
+//import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +23,19 @@ public class ReturnIpController {
     public void setVaryResponseHeader(HttpServletResponse response) {
         response.setHeader("APP_NAME", ProductServiceApplication.APP_NAME);
         response.setHeader("SERVICE_TAG", ProductServiceApplication.SERVICE_TAG);
-        response.setHeader("SERVICE_IP", registration.getHost());
+//        response.setHeader("SERVICE_IP", registration.getHost());
     }
 
-    @Autowired
-    private Registration registration;
+//    @Autowired
+//    private Registration registration;
 
-    @RequestMapping(value = "/getIp", method = RequestMethod.GET)
-    public String getIp(@RequestParam("name") String name, @RequestParam("age") int age) {
-        if (name.equals(registration.getHost())) {
-            throw new RuntimeException("mock error");
-        }
-        return registration.getHost();
-    }
+//    @RequestMapping(value = "/getIp", method = RequestMethod.GET)
+//    public String getIp(@RequestParam("name") String name, @RequestParam("age") int age) {
+//        if (name.equals(registration.getHost())) {
+//            throw new RuntimeException("mock error");
+//        }
+//        return registration.getHost();
+//    }
 
     @RequestMapping(value = "/getTag", method = RequestMethod.GET)
     public String getTag(@RequestParam("name") String name, @RequestParam("province") String province) {

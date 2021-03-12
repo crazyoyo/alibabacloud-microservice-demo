@@ -1,0 +1,17 @@
+nsf:
+  type: dubbo
+  version: '2.0'
+  nsfServer: 'http://nsf-server.aws-redhat76.service.163.org'
+  application:
+    name: ProductService
+    version: 0.0.1
+    projectCode: project1
+    envCode: prod
+    zone: default
+    group: default
+    tags: []
+  authority:
+    accessKey: 3edf7f7d70434b1b9520b54693132591
+    secretKey: 6e2b23bbdac0412aa924b598d88d2ffe
+  manager:
+    patterns: []

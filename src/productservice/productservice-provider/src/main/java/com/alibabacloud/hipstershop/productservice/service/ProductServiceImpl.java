@@ -3,12 +3,12 @@ package com.alibabacloud.hipstershop.productservice.service;
 import com.alibabacloud.hipstershop.productservice.utils.Constant;
 import com.alibabacloud.hipstershop.productserviceapi.domain.ProductItem;
 import com.alibabacloud.hipstershop.productserviceapi.service.ProductService;
-import org.apache.dubbo.config.annotation.Service;
-import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
+//import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ import static com.alibabacloud.hipstershop.productservice.utils.CommonUtil.getLo
  */
 
 @DubboComponentScan
-@RefreshScope
+//@RefreshScope
 @Service(version = "1.0.0")
 public class ProductServiceImpl implements ProductService {
 

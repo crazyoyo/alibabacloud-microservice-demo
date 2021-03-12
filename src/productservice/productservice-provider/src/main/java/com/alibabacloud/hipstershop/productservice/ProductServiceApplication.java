@@ -7,9 +7,9 @@ import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 
-@EnableDiscoveryClient
+@EnableDubbo
 @SpringBootApplication
 public class ProductServiceApplication {
     public static void main(String[] args) {
