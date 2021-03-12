@@ -53,14 +53,13 @@ services:
 
   frontend:
     build: ./src/frontend
-    image: eks.demo.host/nsf-demo/frontend:1.0.0-SNAPSHOT
+    image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/frontend:1.0.0-SNAPSHOT
     container_name: frontend
     #    restart: always
     environment:
       - dubbo.registry.address=zookeeper//zookeeper.host:2181
-      - dubbo.registry.simplified=true
-      - dubbo.metadata-report.address=zookeeper.host:2181
-      - dubbo.config-center.address=zookeeper.host:2181
+      - dubbo.metadata-report.address=zookeeper-server:2181
+      - dubbo.config-center.address=zookeeper-server:2181
     ports:
       - "8080:8080"
     depends_on:
@@ -68,58 +67,46 @@ services:
 
   cartservice:
     build: ./src/cartservice
-    image: eks.demo.host/nsf-demo/cartservice:1.0.0-SNAPSHOT
+    image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/cartservice:1.0.0-SNAPSHOT
     container_name: cartservice
     environment:
-      - dubbo.registry.address=zookeeper//zookeeper.host:2181
-      - dubbo.registry.simplified=true
+      - dubbo.registry.address=zookeeper//zookeeper-server:2181
       - dubbo.metadata-report.address=zookeeper-server:2181
       - dubbo.config-center.address=zookeeper-server:2181
       - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
-      - spring.cloud.zookeeper.discovery.register=true
-      - spring.cloud.zookeeper.config.root=root
-      - spring.cloud.zookeeper.config.enabled=true
     depends_on:
       - "zookeeper"
       - "cart-redis"
 
   checkoutservice:
     build: ./src/checkoutservice
-    image: eks.demo.host/nsf-demo/checkoutservice:1.0.0-SNAPSHOT
+    image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/checkoutservice:1.0.0-SNAPSHOT
     container_name: checkoutservice
     environment:
-      - dubbo.registry.address=zookeeper//zookeeper.host:2181
-      - dubbo.registry.simplified=true
+      - dubbo.registry.address=zookeeper//zookeeper-server:2181
       - dubbo.metadata-report.address=zookeeper-server:2181
       - dubbo.config-center.address=zookeeper-server:2181
       - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
-      - spring.cloud.zookeeper.discovery.register=true
-      - spring.cloud.zookeeper.config.root=root
-      - spring.cloud.zookeeper.config.enabled=true
     depends_on:
       - "zookeeper"
       - "checkout-mysql"
 
   prdoctservice:
     build: ./src/productservice
-    image: eks.demo.host/nsf-demo/productservice:1.0.0-SNAPSHOT
+    image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/productservice:1.0.0-SNAPSHOT
     container_name: productservice
     environment:
-      - dubbo.registry.address=zookeeper//zookeeper.host:2181
-      - dubbo.registry.simplified=true
+      - dubbo.registry.address=zookeeper//zookeeper-server:2181
       - dubbo.metadata-report.address=zookeeper-server:2181
       - dubbo.config-center.address=zookeeper-server:2181
       - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
-      - spring.cloud.zookeeper.discovery.register=true
-      - spring.cloud.zookeeper.config.root=root
-      - spring.cloud.zookeeper.config.enabled=true
     depends_on:
       - "zookeeper"
       - "product-mysql"
 
 #  loadgenerator:
 #    build: ./src/loadgenerator
-#    image: eks.demo.host/nsf-demo/loadgenerator:1.0.0-SNAPSHOT
+#    image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/loadgenerator:1.0.0-SNAPSHOT
 #    container_name: loadgenerator
 
 #  adservice:

@@ -1,16 +1,21 @@
 package com.alibabacloud.hipstershop.productservice.service;
 
-import com.alibabacloud.hipstershop.productservice.utils.Constant;
-import com.alibabacloud.hipstershop.productserviceapi.domain.ProductItem;
-import com.alibabacloud.hipstershop.productserviceapi.service.ProductService;
-import org.apache.dubbo.config.annotation.Service;
-import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 
-import java.util.*;
+import com.alibabacloud.hipstershop.productservice.utils.Constant;
+import com.alibabacloud.hipstershop.productserviceapi.domain.ProductItem;
+import com.alibabacloud.hipstershop.productserviceapi.service.ProductService;
 
 import static com.alibabacloud.hipstershop.productservice.utils.CommonUtil.getLocalIp;
 
@@ -22,7 +27,7 @@ import static com.alibabacloud.hipstershop.productservice.utils.CommonUtil.getLo
  */
 
 @DubboComponentScan
-@RefreshScope
+// @RefreshScope
 @Service(version = "1.0.0")
 public class ProductServiceImpl implements ProductService {
 
