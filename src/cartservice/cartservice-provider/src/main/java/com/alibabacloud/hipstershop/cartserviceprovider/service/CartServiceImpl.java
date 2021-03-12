@@ -1,8 +1,9 @@
 package com.alibabacloud.hipstershop.cartserviceprovider.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibabacloud.hipstershop.cartserviceapi.domain.CartItem;
 import com.alibabacloud.hipstershop.cartserviceprovider.repository.RedisRepository;
-import org.apache.dubbo.config.annotation.Service;
+// import org.apache.dubbo.config.annotation.Service;
 import com.alibabacloud.hipstershop.cartserviceapi.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

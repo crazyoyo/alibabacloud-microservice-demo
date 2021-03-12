@@ -1,5 +1,6 @@
 package com.alibabacloud.hipstershop.checkoutservice.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibabacloud.hipstershop.cartserviceapi.domain.CartItem;
 import com.alibabacloud.hipstershop.checkoutservice.dao.CartDao;
 import com.alibabacloud.hipstershop.checkoutservice.dao.ProductDao;
@@ -8,8 +9,9 @@ import com.alibabacloud.hipstershop.checkoutservice.repository.OrderFormReposito
 import com.alibabacloud.hipstershop.checkoutserviceapi.domain.Order;
 import com.alibabacloud.hipstershop.checkoutserviceapi.service.CheckoutService;
 import com.alibabacloud.hipstershop.productserviceapi.domain.ProductItem;
-import org.apache.dubbo.config.annotation.Service;
-import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
+// import org.apache.dubbo.config.annotation.Service;
+// import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
+import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

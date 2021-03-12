@@ -1,9 +1,11 @@
 package com.alibabacloud.hipstershop.dao;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibabacloud.hipstershop.checkoutserviceapi.domain.Order;
 import com.alibabacloud.hipstershop.checkoutserviceapi.service.CheckoutService;
-import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.stereotype.Service;
+// import org.apache.dubbo.config.annotation.Reference;
+// import org.springframework.stereotype.Service;
 
 /**
  * @author xiaofeng.gxf

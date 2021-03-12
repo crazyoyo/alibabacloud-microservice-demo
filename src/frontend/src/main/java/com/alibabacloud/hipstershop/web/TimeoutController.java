@@ -1,7 +1,8 @@
 package com.alibabacloud.hipstershop.web;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibabacloud.hipsershop.mockapi.service.TimeoutService;
-import org.apache.dubbo.config.annotation.Reference;
+// import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

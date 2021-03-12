@@ -21,8 +21,8 @@
         <java.version>1.8</java.version>
         <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
         <spring.cloud.alibaba.version>2.2.1.RELEASE</spring.cloud.alibaba.version>
-        <dubbo.version>2.7.4</dubbo.version>
-        <dubbo.spring.version>2.7.4.1</dubbo.spring.version>
+        <dubbo.version>2.6.2</dubbo.version>
+        <dubbo.spring.version>2.0.0</dubbo.spring.version>
     </properties>
 
     <dependencyManagement>
@@ -43,26 +43,30 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-bom</artifactId>
+                <!--                <groupId>org.apache.dubbo</groupId> -->
+                <!--                <artifactId>dubbo-dependencies-bom</artifactId> -->
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.spring.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.apache.dubbo</groupId>-->
+<!--                <artifactId>dubbo-spring-boot-starter</artifactId>-->
+<!--                <version>${dubbo.spring.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
+                <!--                <groupId>org.apache.dubbo</groupId> -->
+                <!--                <artifactId>dubbo-dependencies-bom</artifactId> -->
+                <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.apache.dubbo</groupId>
+                        <groupId>com.alibaba</groupId>
                         <artifactId>dubbo-common</artifactId>
                     </exclusion>
                     <exclusion>
@@ -154,6 +158,10 @@
             <groupId>com.alibabacloud.hipstershop</groupId>
             <artifactId>productservice-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
         </dependency>
 
         <!-- SDK/Starter需1.6.2及以上版本，并排掉sentinel-dubbo-adapter依赖 -->
