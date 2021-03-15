@@ -61,7 +61,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - "zookeeper"
+      - "zookeeper-server"
 
   cartservice:
     build: ./src/cartservice
@@ -70,7 +70,7 @@ services:
     environment:
       - zookeeper_host=zookeeper-server
     depends_on:
-      - "zookeeper"
+      - "zookeeper-server"
       - "cart-redis"
 
   checkoutservice:
@@ -80,7 +80,7 @@ services:
     environment:
       - zookeeper_host=zookeeper-server
     depends_on:
-      - "zookeeper"
+      - "zookeeper-server"
       - "checkout-mysql"
 
   prdoctservice:
@@ -90,7 +90,7 @@ services:
     environment:
       - zookeeper_host=zookeeper-server
     depends_on:
-      - "zookeeper"
+      - "zookeeper-server"
       - "product-mysql"
 
 #  loadgenerator:
