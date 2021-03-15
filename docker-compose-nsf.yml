@@ -1,8 +1,8 @@
 version: "3"
 services:
-  zookeeper:
+  zookeeper-server:
     hostname: zookeeper-server
-    image: zookeeper:latest
+    image: zookeeper/zookeeper-server:latest
     container_name: zookeeper-standalone
     environment:
       - PREFER_HOST_MODE=hostname
@@ -57,12 +57,7 @@ services:
     container_name: frontend
     #    restart: always
     environment:
-      - zookeeper.address=zookeeper://zookeeper-server:2181
-      - dubbo.registry.address=zookeeper://zookeeper-server:2181
-      - dubbo.metadata-report.address=zookeeper://zookeeper-server:2181
-      - dubbo.config-center.address=zookeeper://zookeeper-server:2181
-      - zookeeper.host=zookeeper-server
-      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - zookeeper_host=zookeeper-server
     ports:
       - "8080:8080"
     depends_on:
@@ -73,12 +68,7 @@ services:
     image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/cartservice:1.0.0-SNAPSHOT
     container_name: cartservice
     environment:
-      - zookeeper.address=zookeeper://zookeeper-server:2181
-      - dubbo.registry.address=zookeeper://zookeeper-server:2181
-      - dubbo.metadata-report.address=zookeeper://zookeeper-server:2181
-      - dubbo.config-center.address=zookeeper://zookeeper-server:2181
-      - zookeeper.host=zookeeper-server
-      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - zookeeper_host=zookeeper-server
     depends_on:
       - "zookeeper"
       - "cart-redis"
@@ -88,12 +78,7 @@ services:
     image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/checkoutservice:1.0.0-SNAPSHOT
     container_name: checkoutservice
     environment:
-      - zookeeper.address=zookeeper://zookeeper-server:2181
-      - dubbo.registry.address=zookeeper://zookeeper-server:2181
-      - dubbo.metadata-report.address=zookeeper://zookeeper-server:2181
-      - dubbo.config-center.address=zookeeper://zookeeper-server:2181
-      - zookeeper.host=zookeeper-server
-      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - zookeeper_host=zookeeper-server
     depends_on:
       - "zookeeper"
       - "checkout-mysql"
@@ -103,12 +88,7 @@ services:
     image: 280357541969.dkr.ecr.cn-northwest-1.amazonaws.com.cn/nsf-demo-202103/productservice:1.0.0-SNAPSHOT
     container_name: productservice
     environment:
-      - zookeeper.address=zookeeper://zookeeper-server:2181
-      - dubbo.registry.address=zookeeper://zookeeper-server:2181
-      - dubbo.metadata-report.address=zookeeper://zookeeper-server:2181
-      - dubbo.config-center.address=zookeeper://zookeeper-server:2181
-      - zookeeper.host=zookeeper-server
-      - spring.cloud.zookeeper.connect-string=zookeeper-server:2181
+      - zookeeper_host=zookeeper-server
     depends_on:
       - "zookeeper"
       - "product-mysql"
