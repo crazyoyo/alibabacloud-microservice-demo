@@ -7,9 +7,9 @@ import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@EnableDubbo
+@EnableDiscoveryClient
 @SpringBootApplication
 public class ProductServiceApplication {
     public static void main(String[] args) {
@@ -18,7 +18,6 @@ public class ProductServiceApplication {
 
 
     public static String SERVICE_TAG;
-    public static String SERVICE_IP;
     public static String APP_NAME = System.getProperty("msc.appName","nil");
 
     static {

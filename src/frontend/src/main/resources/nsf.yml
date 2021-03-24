@@ -1,0 +1,34 @@
+nsf:
+  #  基本信息
+  application:
+    name: frontend
+    version: 0.0.1
+    desc: this is frontend service
+
+  #  注册中心
+  registry:
+    enable: true
+    address: zookeeper://3.112.71.197:2181
+
+  # 应用监控
+  metrics:
+    enable: true # 是否启用hystrix的metrics应用监控
+
+  # 方法配置
+  manager:
+    patterns:
+      - className: com.netease.cloud.nsf.demo.stock.viewer.web.service.impl.*
+
+  # 地址-服务名对应关系配置
+  relations:
+    services:
+      - address: http://localhost:9001
+        service: http://nsf-demo-stock-provider
+      - address: http://localhost:9002
+        service: http://nsf-demo-stock-advisor
+
+    versions:
+      - service: nsf-demo-stock-provider
+        version: 0.0.1
+      - service: nsf-demo-stock-advisor
+        version: 0.0.1

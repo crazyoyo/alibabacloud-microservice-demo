@@ -5,15 +5,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.alibabacloud.hipstershop.common.MyRule;
-import com.netflix.loadbalancer.IRule;
+//import com.alibabacloud.hipstershop.common.MyRule;
+//import com.netflix.loadbalancer.IRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+@EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
 public class Application {
@@ -56,8 +58,8 @@ public class Application {
         } catch (Throwable ignore) {}
     }
 
-    @Bean
-    public IRule iRule(){
-        return new MyRule();
-    }
+//    @Bean
+//    public IRule iRule(){
+//        return new MyRule();
+//    }
 }

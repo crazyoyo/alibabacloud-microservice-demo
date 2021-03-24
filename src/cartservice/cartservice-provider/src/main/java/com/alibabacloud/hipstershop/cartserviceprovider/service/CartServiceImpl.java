@@ -2,7 +2,8 @@ package com.alibabacloud.hipstershop.cartserviceprovider.service;
 
 import com.alibabacloud.hipstershop.cartserviceapi.domain.CartItem;
 import com.alibabacloud.hipstershop.cartserviceprovider.repository.RedisRepository;
-import org.apache.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import com.alibabacloud.hipstershop.cartserviceapi.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
+@DubboComponentScan
 //@RefreshScope
 @Service(version = "1.0.0")
 public class CartServiceImpl implements CartService {

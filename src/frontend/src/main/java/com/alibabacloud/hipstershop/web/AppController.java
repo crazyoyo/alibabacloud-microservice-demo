@@ -10,11 +10,10 @@ import com.alibabacloud.hipstershop.domain.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class AppController {
 
-
     private static String env = System.getenv("demo_version");
 
     @Autowired
@@ -43,9 +41,8 @@ public class AppController {
     @Autowired
     private CartDAO cartDAO;
 
-
-    @Autowired
-    private Registration registration;
+//    @Autowired
+//    private Registration registration;
 
     @Autowired
     private OrderDAO orderDAO;
@@ -63,7 +60,8 @@ public class AppController {
     public void setVaryResponseHeader(HttpServletResponse response) {
         response.setHeader("APP_NAME", Application.APP_NAME);
         response.setHeader("SERVICE_TAG", Application.SERVICE_TAG);
-        response.setHeader("SERVICE_IP", registration.getHost());
+//        response.setHeader("SERVICE_IP", registration.getHost());
+        response.setHeader("SERVICE_IP", "192.168.177.149");
     }
 
     @ApiOperation(value = "首页", tags = {"首页操作页面"})
@@ -73,13 +71,14 @@ public class AppController {
 
         model.addAttribute("FRONTEND_APP_NAME", Application.APP_NAME);
         model.addAttribute("FRONTEND_SERVICE_TAG", Application.SERVICE_TAG);
-        model.addAttribute("FRONTEND_IP", registration.getHost());
+//        model.addAttribute("FRONTEND_IP", registration.getHost());
+        model.addAttribute("FRONTEND_IP", "192.168.177.149");
 
         model.addAttribute("PRODUCT_APP_NAME", PRODUCT_APP_NAME);
         model.addAttribute("PRODUCT_SERVICE_TAG", PRODUCT_SERVICE_TAG);
         model.addAttribute("PRODUCT_IP", PRODUCT_IP);
 
-        model.addAttribute("new_version", StringUtils.isBlank(env));
+        model.addAttribute("new_version", StringUtils.isEmpty(env));
         return "index.html";
     }
 

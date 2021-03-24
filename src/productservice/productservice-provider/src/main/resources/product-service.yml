@@ -1,15 +1,15 @@
 nsf:
-#  config:
-#    enable: true
-#    server: {replace with your nsf-config-server url}
-#      namespaces:
-#        - name: application
-#          Private: true
-  type: dubbo
+  config:
+    enable: true
+    server: {replace with your nsf-config-server url}
+      namespaces:
+        - name: application
+          Private: true
+  type: http
   version: '2.0'
   nsfServer: 'http://nsf-server-cust56.netease.com'
   application:
-    name: ProductService
+    name: product-service
     version: 0.0.1
     projectCode: gldq-default
     envCode: prod
