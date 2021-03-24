@@ -4,9 +4,8 @@ FROM openjdk:8-jdk-alpine
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 
 WORKDIR /app
-#COPY /productservice-provider/target/productservice-provider-1.0.0-SNAPSHOT.jar /app
-RUN echo 'we are running some # of cool things'
-COPY /productservice-provider/target/*.jar /app
+RUN ls /var/lib/docker/tmp/docker-builder*
+COPY /productservice-provider/target/productservice-provider-1.0.0-SNAPSHOT.jar /app
 COPY /start.sh /app
 
 EXPOSE 8080
