@@ -24,11 +24,11 @@ spec:
     metadata:
       annotations:
         alicloud.service.tag: tag1
+      labels:
         armsPilotAutoEnable: "on"
         armsPilotCreateAppName: {{ .Values.application.name.prefix}}frontend1
         msePilotAutoEnable: "on"
         msePilotCreateAppName: {{ .Values.application.name.prefix}}frontend
-      labels:
         app: frontend1
     spec:
       containers:
@@ -51,7 +51,7 @@ spec:
           value: ' -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 '
         - name: dubbo.consumer.check
           value: "false"
-        image: registry.cn-hangzhou.aliyuncs.com/alibabacloud-microservice-demo/frontend:{{ .Values.images.version}}
+        image: registry.cn-hangzhou.aliyuncs.com/mse-hz/frontend:{{ .Values.images.version}}
         imagePullPolicy: Always
         name: frontend1
         ports:

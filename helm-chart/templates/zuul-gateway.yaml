@@ -24,13 +24,12 @@ spec:
   template:
     metadata:
       annotations:
+      labels:
+        app: zuul-gateway
         armsPilotAutoEnable: "on"
         armsPilotCreateAppName: {{ .Values.application.name.prefix}}zuul-gateway
         msePilotAutoEnable: "on"
         msePilotCreateAppName: {{ .Values.application.name.prefix}}zuul-gateway
-      creationTimestamp: null
-      labels:
-        app: zuul-gateway
     spec:
       containers:
       - env:
@@ -52,7 +51,7 @@ spec:
           value: "true"
         - name: JAVA_TOOL_OPTIONS
           value: ' -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 '
-        image: registry.cn-hangzhou.aliyuncs.com/alibabacloud-microservice-demo/zuul-gateway:1.0-SNAPSHOT
+        image: registry.cn-hangzhou.aliyuncs.com/mse-hz/zuul-gateway:{{ .Values.images.version}}
         imagePullPolicy: IfNotPresent
         name: zuul-gateway
         ports:

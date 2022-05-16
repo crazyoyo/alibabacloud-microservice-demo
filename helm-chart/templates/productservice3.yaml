@@ -25,12 +25,12 @@ spec:
     metadata:
       annotations:
         alicloud.service.tag: tag3
+      labels:
+        app: productservice3
         armsPilotAutoEnable: "on"
         armsPilotCreateAppName: {{ .Values.application.name.prefix}}productservice3
         msePilotAutoEnable: "on"
         msePilotCreateAppName: {{ .Values.application.name.prefix}}productservice
-      labels:
-        app: productservice3
     spec:
       containers:
         - env:
@@ -46,7 +46,7 @@ spec:
               value: ' -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 '
             - name: dubbo.consumer.check
               value: "false"
-          image: registry.cn-hangzhou.aliyuncs.com/alibabacloud-microservice-demo/productservice:{{ .Values.images.version}}
+          image: registry.cn-hangzhou.aliyuncs.com/mse-hz/productservice:{{ .Values.images.version}}
           imagePullPolicy: Always
           name: productservice3
           ports:

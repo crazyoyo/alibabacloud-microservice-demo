@@ -23,10 +23,10 @@ spec:
     metadata:
       annotations:
         alicloud.service.tag: v2
-        msePilotAutoEnable: "on"
-        msePilotCreateAppName: {{ .Values.application.name.prefix}}checkoutservice
       labels:
         app: checkoutservice
+        msePilotAutoEnable: "on"
+        msePilotCreateAppName: {{ .Values.application.name.prefix}}checkoutservice
     spec:
       containers:
         - env:
@@ -38,7 +38,7 @@ spec:
               value: ' -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 '
             - name: dubbo.consumer.check
               value: "false"
-          image: registry.cn-hangzhou.aliyuncs.com/alibabacloud-microservice-demo/checkoutservice:{{ .Values.images.version}}
+          image: registry.cn-hangzhou.aliyuncs.com/mse-hz/checkoutservice:{{ .Values.images.version}}
           imagePullPolicy: Always
           name: checkoutservice
           resources:

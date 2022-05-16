@@ -23,12 +23,12 @@ spec:
     metadata:
       annotations:
         alicloud.service.tag: v1
+      labels:
+        app: cartservice1
         armsPilotAutoEnable: "on"
         armsPilotCreateAppName: {{ .Values.application.name.prefix}}cartservice
         msePilotAutoEnable: "on"
         msePilotCreateAppName: {{ .Values.application.name.prefix}}cartservice
-      labels:
-        app: cartservice1
     spec:
       containers:
       - env:
@@ -44,7 +44,7 @@ spec:
           value: ' -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 '
         - name: dubbo.consumer.check
           value: "false"
-        image: registry.cn-hangzhou.aliyuncs.com/alibabacloud-microservice-demo/cartservice:{{ .Values.images.version}}
+        image: registry.cn-hangzhou.aliyuncs.com/mse-hz/cartservice:{{ .Values.images.version}}
         imagePullPolicy: Always
         name: cartservice
         ports:
